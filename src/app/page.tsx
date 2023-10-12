@@ -81,6 +81,23 @@ export default function Home() {
     }
   };
 
+  const handleDownload = () => {
+    const csvContent = [
+      translatedData?.headers.join(","),
+      ...(translatedData?.data.map((row) => row.join(",")) || []),
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "translated.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="p-4 w-full min-h-screen">
       <div className="max-w-5xl mx-auto my-10">
@@ -144,6 +161,7 @@ export default function Home() {
               id="language"
               onChange={(e) => setSelectedLanguage(e.target.value)}
               value={selectedLanguage}
+              className="border border-gray-300 rounded-md p-2"
             >
               <option value="">Select a Language</option>
               {languages.map((language, index) => (
@@ -156,12 +174,22 @@ export default function Home() {
         )}
 
         {selectedLanguage && (
-          <button
-            onClick={handleTranslate}
-            className="bg-blue-500 text-white px-4 py-2"
-          >
-            Translate
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={handleTranslate}
+              className="bg-blue-500 text-white px-4 py-2"
+            >
+              Translate
+            </button>
+            {translatedData && (
+              <button
+                className="text-white px-4 py-2 bg-green-600"
+                onClick={handleDownload}
+              >
+                Download
+              </button>
+            )}
+          </div>
         )}
 
         {
