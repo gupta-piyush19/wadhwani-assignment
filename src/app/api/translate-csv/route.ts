@@ -51,7 +51,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
     rows.map(async (row) => {
       return await Promise.all(
         row.map(async (value, idx) => {
-          if (idx === 0) {
+          if (headers[idx] === "phone_number") {
+            console.log("phone number");
             return value;
           }
           return await translator.translateText(value, targetLanguage);

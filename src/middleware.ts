@@ -8,14 +8,14 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
   if (!secret_key) {
     return NextResponse.json(
-      { error: "Secret key is required" },
+      { Error: "Secret key is required" },
       { status: 401 }
     );
   }
   const secretKey = process.env.API_SECRET_KEY as string;
   if (secret_key !== secretKey) {
     return NextResponse.json(
-      { error: "Secret key is not valid" },
+      { Error: "Secret key is not valid" },
       { status: 401 }
     );
   }
@@ -26,7 +26,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
   if (!csv) {
     return NextResponse.json(
-      { error: "CSV file is required" },
+      { Error: "CSV file is required" },
       { status: 400 }
     );
   }
@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
   const csvFile = csv as File;
   if (csvFile.type !== "text/csv") {
     return NextResponse.json(
-      { error: "Only CSV files are allowed" },
+      { Error: "Only CSV files are allowed" },
       { status: 400 }
     );
   }
