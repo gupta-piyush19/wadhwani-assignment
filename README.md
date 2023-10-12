@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Wadhwani AI assignment
 
-## Getting Started
+## Problem Statement
 
-First, run the development server:
+To convert the uploaded csv file from english to various languages using Google Translate API.
+
+## Installation
+
+1. Clone the repository using `git clone https://github.com/gupta-piyush19/wadhwani-assignment.git`
+2. cd `wadhwani-assignment`.
+3. install the dependencies using `pnpm install`.
+4. create a `.env.local` file in the root and add the following variables:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+GOOGLE_APPLICATION_CREDENTIALS=<YOUR_GOOGLE_TRANSLATE_CREDENTIALS_OBJECT>
+API_SECRET_KEY=<YOUR_API_SECRET_KEY>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Run the server using `pnpm run dev`.
+2. Open `http://localhost:3000` in your browser.
+3. Upload the csv file and select the language to which you want to translate the file.
+4. Click on the `Translate` button.
+5. The translated file will be visible on the screen.
+6. Click on the `Download` button to download the translated file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tech Stack
 
-## Learn More
+- Next.js
+- Google Translate API
+- TypeScript
+- Tailwind CSS
+- Vercel
+- pnpm
+- ESLint
+- Prettier
 
-To learn more about Next.js, take a look at the following resources:
+## API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `/api/translate-csv` - POST request to translate the uploaded csv file.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  ```typescript
+  headers: {
+    secret_key: string;
+  }
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  body: FormData<{
+    csv: File;
+    convertTo: "hindi" | "punjabi" | "marathi" | "telugu";
+  }>;
+  ```
