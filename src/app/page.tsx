@@ -62,7 +62,7 @@ export default function Home() {
 
       const response = await fetch("/api/translate-csv", {
         headers: {
-          secret_key: secretKey,
+          "secret-key": secretKey,
         },
         method: "POST",
         body: formData,

@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 export async function middleware(request: NextRequest, response: NextResponse) {
   // authenticate the request
   const headersList = headers();
-  const secret_key = headersList.get("secret_key");
+  const secret_key = headersList.get("secret-key");
 
   if (!secret_key) {
     return NextResponse.json(

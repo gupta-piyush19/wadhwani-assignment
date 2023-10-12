@@ -42,7 +42,7 @@ API_SECRET_KEY=<YOUR_API_SECRET_KEY>
 
   ```typescript
   headers: {
-    secret_key: string;
+    secret-key: string;
   }
 
   body: FormData<{
